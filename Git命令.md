@@ -6,6 +6,8 @@ Git
 git log //查看commit日志
 git show xxxx //查看某次commit提交的内容
 git reset --hard xxxx //git回退到某次xxxx版本上（也可以前进到某个版本）
+git status //查看当前文件的修改信息
+git diff xx.log //查看某个文件改动了什么内容
 ```
 
 2、提交相关
