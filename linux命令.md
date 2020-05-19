@@ -19,3 +19,9 @@ bg %jobnumber //将一个前台命令进程放到后台执行
 fg %jobnumber //将一个后台命令进程放到前台执行
 ```
 
+4、给某个文件增加：所有人可执行，同组可写的权限
+
+```shell
+chmod a+x g+w filename
+```
+
