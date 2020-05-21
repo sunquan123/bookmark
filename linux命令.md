@@ -25,3 +25,8 @@ fg %jobnumber //将一个后台命令进程放到前台执行
 chmod a+x g+w filename
 ```
 
+5、合并两个文件
+
+```shell
+cat file1 file2 > newfile
+```
