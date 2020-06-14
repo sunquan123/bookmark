@@ -25,6 +25,7 @@ fg %jobnumber //将一个后台命令进程放到前台执行
 chmod a+x g+w filename
 ```
 
+
 权限对应数字：
 
 ```
@@ -35,3 +36,9 @@ r-w-x：用4-2-1表示。
 组内g的权限为读与写:rw- = 6
 ```
 
+
+5、合并两个文件
+
+```shell
+cat file1 file2 > newfile
+```
