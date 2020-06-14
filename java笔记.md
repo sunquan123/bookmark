@@ -27,3 +27,10 @@ Private:仅同类使用，用于类中对外提供的方法的助手方法
 静态代码块、静态方法的初始化-->基类构造器的初始化-->成员变量的初始化-->自己的构造器的初始化
 
 5、Mac下/usr/local目录默认是对于Finder是隐藏，如果需要到/usr/local下去，打开Finder，然后使用command+shift+G，在弹出的目录中填写/usr/local就可以了。
+
+6、Java中的count++不是原子操作：A.读取主内存中的count变量赋值到临时变量tmp中
+
+​                                                              B.tmp+1
+
+​															  C.将tmp赋值到主内存count变量中
+
