@@ -33,3 +33,9 @@ git stash pop //将stash的改动内容恢复到文件中
 git stash list //查看stash的列表
 ```
 
+5、proxychains代理github下载
+
+```bash
+proxychains4 git clone ssh地址
+```
+
