@@ -181,3 +181,10 @@ GSSAPIAuthentication no
 service sshd restart
 ```
 
+### 7、搬瓦工常用命令
+
+```
+ssh root@172.93.45.163 -p 29857
+9Rx3UwtdgYgD
+```
+
