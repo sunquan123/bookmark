@@ -8,3 +8,5 @@ yum install -y wget && wget -O install.sh http://download.bt.cn/install/install_
 
 2、使用http://172.93.45.163:8888/620662ab 访问
 
+
+
