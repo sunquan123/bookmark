@@ -35,7 +35,27 @@ git stash list //查看stash的列表
 
 5、proxychains代理github下载
 
-```bash
+```sh
 proxychains4 git clone ssh地址
+```
+
+6、删除文件夹及文件夹中的文件
+
+第一步，用鼠标右键删除掉你的文件夹
+第二步，git bash 打开命令窗口，按顺序输入如下命令
+
+```sh
+git rm -r --cached [文件夹名]        #删除缓存区的文件目录         
+git commit -m "Remove the now ignored directory some-directory"
+git push
+```
+
+7、github令牌提交
+
+应用令牌
+将生成的令牌拷贝下来，修改现有项目的url
+
+```
+git remote set-url origin  https://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@github.com/sunquan123/sunquan123.github.io.git
 ```
 
