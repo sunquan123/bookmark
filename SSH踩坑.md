@@ -45,25 +45,58 @@ root@pts/1 $
 
 ### 4、开启密钥登陆
 
-在服务器端生成sshkey：
+在客户端生成sshkey：
 
 ```shell
-[root@instance-1 ~]# ssh-keygen
+ssh-keygen
 ```
 
-拷贝公钥与私钥到客户端：
+生成公钥 /User/sunquan/.ssh/id_rsa.pub
+
+私钥 /User/sunquan/.ssh/id_rsa
+
+自动上传公钥到服务器：ssh-copy-id 命令
 
 ```shell
-[root@instance-1 ~]# scp -r root@35.221.217.143:/root/.ssh ～/.ssh
+ssh-copy-id -i /Users/sunquan/.ssh/id_rsa.pub -p 36666 root@172.93.45.189
 ```
 
 验证一下连接：
 
 ```shell
-sh-3.2# ssh root@35.221.217.143
-Last login: Thu Feb  6 05:38:10 2020 from 117.89.214.72
-[root@instance-1 ~]#
+ssh -v root@172.93.45.189 -p 36666
 ```
+
+使用ssh-config进行ssh登录配置
+
+```
+vim /Users/sunquan/.ssh/config
+
+Host banwagong-sun
+  HostName 172.93.45.189
+  Port 36666
+  User root
+  IdentityFile /Users/sunquan/.ssh/id_rsa
+```
+
+配置参数说明
+
+```
+Host : 可以看作是一个你要识别的名称，对识别的名称，进行配置对应的的主机名和ssh文件
+HostName : 要登录主机的IP地址、或者域名
+User : 登录名
+port : 端口
+IdentityFile : 指明上面User对应的identityFile路径 也就是 私钥的路径
+ProxyCommand : 代理命令(不常用) , 通俗解释: 就是当你连接上目标服务器后，首先执行的命令，例如：ProxyCommand tail -f /backend/logs/info.log 表示登录目标主机后，执行此命令查看日志
+```
+
+下次登录使用，即可
+
+```
+ssh banwagong-sun
+```
+
+
 
 ### 5、弃用shadow socks，启用v2ray
 
@@ -81,17 +114,104 @@ systemctl stop shadowsocks # 也可以从系统层面关闭shadowsocks
 安装v2ray脚本：
 
 ```shell
-[root@instance-1 ~]# wget https://install.direct/go.sh
---2020-02-06 05:57:44--  https://install.direct/go.sh
-正在解析主机 install.direct (install.direct)... 104.27.175.71, 104.27.174.71, 2606:4700:3034::681b:ae47, ...
-正在连接 install.direct (install.direct)|104.27.175.71|:443... 已连接。
-已发出 HTTP 请求，正在等待回应... 200 OK
-长度：未指定 [text/plain]
-正在保存至: “go.sh”
+[root@instance-1 ~]# bash <(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh)
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 21613  100 21613    0     0   114k      0 --:--:-- --:--:-- --:--:--  114k
+info: Installing V2Ray v4.34.0 for x86_64
+Downloading V2Ray archive: https://github.com/v2fly/v2ray-core/releases/download/v4.34.0/v2ray-linux-64.zip
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   626  100   626    0     0   2858      0 --:--:-- --:--:-- --:--:--  2871
+100 11.8M  100 11.8M    0     0  24.8M      0 --:--:-- --:--:-- --:--:-- 82.7M
+Downloading verification file for V2Ray archive: https://github.com/v2fly/v2ray-core/releases/download/v4.34.0/v2ray-linux-64.zip.dgst
+已加载插件：fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirror.hostduplex.com
+ * elrepo-kernel: dfw.mirror.rackspace.com
+ * extras: repos-lax.psychz.net
+ * updates: mirror.shastacoe.net
+正在解决依赖关系
+--> 正在检查事务
+---> 软件包 unzip.x86_64.0.6.0-21.el7 将被 安装
+--> 解决依赖关系完成
 
-    [ <=>                                   ] 13,666      --.-K/s 用时 0s
+依赖关系解决
 
-2020-02-06 05:57:44 (60.9 MB/s) - “go.sh” 已保存 [13666]
+================================================================================
+ Package          架构              版本                  源               大小
+================================================================================
+正在安装:
+ unzip            x86_64            6.0-21.el7            base            171 k
+
+事务概要
+================================================================================
+安装  1 软件包
+
+总下载量：171 k
+安装大小：365 k
+Downloading packages:
+unzip-6.0-21.el7.x86_64.rpm                                | 171 kB   00:00
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  正在安装    : unzip-6.0-21.el7.x86_64                                     1/1
+  验证中      : unzip-6.0-21.el7.x86_64                                     1/1
+
+已安装:
+  unzip.x86_64 0:6.0-21.el7
+
+完毕！
+info: unzip is installed.
+info: Extract the V2Ray package to /tmp/tmp.Rvx7x2dItK and prepare it for installation.
+rm: 无法删除"/etc/systemd/system/v2ray.service.d/10-donot_touch_multi_conf.conf": 没有那个文件或目录
+rm: 无法删除"/etc/systemd/system/v2ray@.service.d/10-donot_touch_multi_conf.conf": 没有那个文件或目录
+info: Systemd service files have been installed successfully!
+warning: The following are the actual parameters for the v2ray service startup.
+warning: Please make sure the configuration file path is correctly set.
+~~~~~~~~~~~~~~~~
+[Unit]
+Description=V2Ray Service
+Documentation=https://www.v2fly.org/
+After=network.target nss-lookup.target
+
+[Service]
+User=nobody
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ExecStart=/usr/local/bin/v2ray -config /usr/local/etc/v2ray/config.json
+Restart=on-failure
+RestartPreventExitStatus=23
+
+[Install]
+WantedBy=multi-user.target
+# In case you have a good reason to do so, duplicate this file in the same directory and make your customizes there.
+# Or all changes you made will be lost!  # Refer: https://www.freedesktop.org/software/systemd/man/systemd.unit.html
+[Service]
+ExecStart=
+ExecStart=/usr/local/bin/v2ray -config /usr/local/etc/v2ray/config.json
+~~~~~~~~~~~~~~~~
+warning: The systemd version on the current operating system is too low.
+warning: Please consider to upgrade the systemd or the operating system.
+
+installed: /usr/local/bin/v2ray
+installed: /usr/local/bin/v2ctl
+installed: /usr/local/share/v2ray/geoip.dat
+                    "type": "field",
+installed: /usr/local/share/v2ray/geosite.dat
+installed: /usr/local/etc/v2ray/config.json
+installed: /var/log/v2ray/
+installed: /var/log/v2ray/access.log
+installed: /var/log/v2ray/error.log
+installed: /etc/systemd/system/v2ray.service
+installed: /etc/systemd/system/v2ray@.service
+removed: /tmp/tmp.Rvx7x2dItK
+info: V2Ray v4.34.0 is installed.
+You may need to execute a command to remove dependent software: yum remove curl unzip
+Please execute the command: systemctl enable v2ray; systemctl start v2ray
+
 ```
 
 启动脚本：
@@ -127,7 +247,7 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/v2ray.service t
 V2Ray v4.22.1 is installed.
 ```
 
-v2ray的配置文件/etc/v2ray/config.json:
+v2ray的配置文件usr/local/etc/v2ray/config.json:
 
 在线生成器：https://intmainreturn0.com/v2ray-config-gen/#
 
@@ -184,7 +304,42 @@ service sshd restart
 ### 7、搬瓦工常用命令
 
 ```
-ssh root@172.93.45.163 -p 29857
-9Rx3UwtdgYgD
+ssh root@172.93.45.189 -p 36666
+pn56aqJQU0OT
 ```
+
+### 8、解决SSH一段时间不操作就退出的问题
+
+##### 修改SSH服务端的配置
+
+sudo vim /etc/ssd/sshd_config
+
+把下面这两行的注册打开，然后修改参数：
+
+ClientAliveInterval 30 # 表示每30秒服务器向客户端发起一次心跳，如果客户端响应就保持连接
+ClientAliveCountMax 5 # 如果连续5服务器收不到心跳，就断开连接
+
+以上两个参数，可以根据自己的情况来设置。
+
+最后，配置要生效，需要重启sshd服务：
+
+service sshd restart
+
+正常情况，客户端不会不响应服务器的心跳，因此SSH客户端就不会再自动退出了。
+
+##### 修改SSH客户端的配置
+
+修改客户端的配置的好处是，不需要重启服务端，如果你没有权限修改SSH服务器，也只能修改客户端的配置了。
+
+sudo vim /etc/ssh/ssh_config / vim /Users/sunquan/.ssh/config
+
+增加：
+
+TCPKeepAlive yes # 据说这个配置项默认是开启的
+ServerAliveInterval 30  #客户端主动向服务端请求响应的间隔
+ServerAliveCountMax 5 # 连续5此客户端收不到服务器的响应，就是退出链接
+
+
+
+
 
