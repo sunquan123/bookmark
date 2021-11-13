@@ -114,149 +114,69 @@ systemctl stop shadowsocks # 也可以从系统层面关闭shadowsocks
 安装v2ray脚本：
 
 ```shell
-[root@instance-1 ~]# bash <(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh)
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100 21613  100 21613    0     0   114k      0 --:--:-- --:--:-- --:--:--  114k
-info: Installing V2Ray v4.34.0 for x86_64
-Downloading V2Ray archive: https://github.com/v2fly/v2ray-core/releases/download/v4.34.0/v2ray-linux-64.zip
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100   626  100   626    0     0   2858      0 --:--:-- --:--:-- --:--:--  2871
-100 11.8M  100 11.8M    0     0  24.8M      0 --:--:-- --:--:-- --:--:-- 82.7M
-Downloading verification file for V2Ray archive: https://github.com/v2fly/v2ray-core/releases/download/v4.34.0/v2ray-linux-64.zip.dgst
-已加载插件：fastestmirror
-Loading mirror speeds from cached hostfile
- * base: mirror.hostduplex.com
- * elrepo-kernel: dfw.mirror.rackspace.com
- * extras: repos-lax.psychz.net
- * updates: mirror.shastacoe.net
-正在解决依赖关系
---> 正在检查事务
----> 软件包 unzip.x86_64.0.6.0-21.el7 将被 安装
---> 解决依赖关系完成
+bash <(curl -s -L https://git.io/v2ray-setup.sh)
 
-依赖关系解决
 
-================================================================================
- Package          架构              版本                  源               大小
-================================================================================
-正在安装:
- unzip            x86_64            6.0-21.el7            base            171 k
+..由于你的 VPS 内核支持开启 BBR ...已经为你启用 BBR 优化....
 
-事务概要
-================================================================================
-安装  1 软件包
 
-总下载量：171 k
-安装大小：365 k
-Downloading packages:
-unzip-6.0-21.el7.x86_64.rpm                                | 171 kB   00:00
-Running transaction check
-Running transaction test
-Transaction test succeeded
-Running transaction
-  正在安装    : unzip-6.0-21.el7.x86_64                                     1/1
-  验证中      : unzip-6.0-21.el7.x86_64                                     1/1
+---------- V2Ray 配置信息 -------------
 
-已安装:
-  unzip.x86_64 0:6.0-21.el7
+ 地址 (Address) = 23.106.158.135
 
-完毕！
-info: unzip is installed.
-info: Extract the V2Ray package to /tmp/tmp.Rvx7x2dItK and prepare it for installation.
-rm: 无法删除"/etc/systemd/system/v2ray.service.d/10-donot_touch_multi_conf.conf": 没有那个文件或目录
-rm: 无法删除"/etc/systemd/system/v2ray@.service.d/10-donot_touch_multi_conf.conf": 没有那个文件或目录
-info: Systemd service files have been installed successfully!
-warning: The following are the actual parameters for the v2ray service startup.
-warning: Please make sure the configuration file path is correctly set.
-~~~~~~~~~~~~~~~~
-[Unit]
-Description=V2Ray Service
-Documentation=https://www.v2fly.org/
-After=network.target nss-lookup.target
+ 端口 (Port) = 37777
 
-[Service]
-User=nobody
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
-ExecStart=/usr/local/bin/v2ray -config /usr/local/etc/v2ray/config.json
-Restart=on-failure
-RestartPreventExitStatus=23
+ 用户ID (User ID / UUID) = 4b1ce1c3-81aa-4bfa-9027-2332512f97a4
 
-[Install]
-WantedBy=multi-user.target
-# In case you have a good reason to do so, duplicate this file in the same directory and make your customizes there.
-# Or all changes you made will be lost!  # Refer: https://www.freedesktop.org/software/systemd/man/systemd.unit.html
-[Service]
-ExecStart=
-ExecStart=/usr/local/bin/v2ray -config /usr/local/etc/v2ray/config.json
-~~~~~~~~~~~~~~~~
-warning: The systemd version on the current operating system is too low.
-warning: Please consider to upgrade the systemd or the operating system.
+ 额外ID (Alter Id) = 0
 
-installed: /usr/local/bin/v2ray
-installed: /usr/local/bin/v2ctl
-installed: /usr/local/share/v2ray/geoip.dat
-                    "type": "field",
-installed: /usr/local/share/v2ray/geosite.dat
-installed: /usr/local/etc/v2ray/config.json
-installed: /var/log/v2ray/
-installed: /var/log/v2ray/access.log
-installed: /var/log/v2ray/error.log
-installed: /etc/systemd/system/v2ray.service
-installed: /etc/systemd/system/v2ray@.service
-removed: /tmp/tmp.Rvx7x2dItK
-info: V2Ray v4.34.0 is installed.
-You may need to execute a command to remove dependent software: yum remove curl unzip
-Please execute the command: systemctl enable v2ray; systemctl start v2ray
+ 传输协议 (Network) = tcp
+
+ 伪装类型 (header type) = none
+
+---------- END -------------
+
+V2Ray 客户端使用教程: https://git.io/v2ray-client
+
+提示: 输入 v2ray url 可生成 vmess URL 链接 / 输入 v2ray qr 可生成二维码链接
+
+免被墙..推荐使用JMS: https://www.itblogcn.com/article/1012.html
+
+
+ 该脚本已自动关闭防火墙...
+
+
+---------- V2Ray vmess URL / V2RayNG v0.4.1+ / V2RayN v2.1+ / 仅适合部分客户端 -------------
+
+vmess://ewoidiI6ICIyIiwKInBzIjogImlwXzIzLjEwNi4xNTguMTM1IiwKImFkZCI6ICIyMy4xMDYuMTU4LjEzNSIsCiJwb3J0IjogIjM3Nzc3IiwKImlkIjogIjRiMWNlMWMzLTgxYWEtNGJmYS05MDI3LTIzMzI1MTJmOTdhNCIsCiJhaWQiOiAiMCIsCiJuZXQiOiAidGNwIiwKInR5cGUiOiAibm9uZSIsCiJob3N0IjogIiIsCiJwYXRoIjogIiIsCiJ0bHMiOiAiIgp9Cg==
+
+免被墙..推荐使用JMS: https://www.itblogcn.com/article/1012.html
 
 ```
 
-启动脚本：
-
-```shell
-[root@instance-1 ~]# sudo bash go.sh
-Installing V2Ray v4.22.1 on x86_64
-Downloading V2Ray: https://github.com/v2ray/v2ray-core/releases/download/v4.22.1/v2ray-linux-64.zip
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100   608    0   608    0     0    591      0 --:--:--  0:00:01 --:--:--   592
-100 11.6M  100 11.6M    0     0  3177k      0  0:00:03  0:00:03 --:--:-- 4593k
-Extracting V2Ray package to /tmp/v2ray.
-Archive:  /tmp/v2ray/v2ray.zip
-  inflating: /tmp/v2ray/config.json
-   creating: /tmp/v2ray/doc/
-  inflating: /tmp/v2ray/doc/readme.md
-  inflating: /tmp/v2ray/geoip.dat
-  inflating: /tmp/v2ray/geosite.dat
-   creating: /tmp/v2ray/systemd/
-  inflating: /tmp/v2ray/systemd/v2ray.service
-   creating: /tmp/v2ray/systemv/
-  inflating: /tmp/v2ray/systemv/v2ray
-  inflating: /tmp/v2ray/v2ctl
- extracting: /tmp/v2ray/v2ctl.sig
-  inflating: /tmp/v2ray/v2ray
- extracting: /tmp/v2ray/v2ray.sig
-  inflating: /tmp/v2ray/vpoint_socks_vmess.json
-  inflating: /tmp/v2ray/vpoint_vmess_freedom.json
-PORT:18021
-UUID:98f3795b-2712-406f-8c13-7f33257f6001
-Created symlink from /etc/systemd/system/multi-user.target.wants/v2ray.service to /etc/systemd/system/v2ray.service.
-V2Ray v4.22.1 is installed.
-```
-
-v2ray的配置文件usr/local/etc/v2ray/config.json:
+v2ray的配置文件/etc/v2ray/config.json:
 
 在线生成器：https://intmainreturn0.com/v2ray-config-gen/#
 
 控制v2ray的命令：
 
 ```shell
-# sudo systemctl start v2ray    启动
-# sudo systemctl stop v2ray     停止
-# sudo systemctl restart v2ray  重启
+v2ray info 查看 V2Ray 配置信息
+v2ray config 修改 V2Ray 配置
+v2ray link 生成 V2Ray 配置文件链接
+v2ray infolink 生成 V2Ray 配置信息链接
+v2ray qr 生成 V2Ray 配置二维码链接
+v2ray ss 修改 Shadowsocks 配置
+v2ray ssinfo 查看 Shadowsocks 配置信息
+v2ray ssqr 生成 Shadowsocks 配置二维码链接
+v2ray status 查看 V2Ray 运行状态
+v2ray start 启动 V2Ray
+v2ray stop 停止 V2Ray
+v2ray restart 重启 V2Ray
+v2ray log 查看 V2Ray 运行日志
+v2ray update 更新 V2Ray
+v2ray update.sh 更新 V2Ray 管理脚本
+v2ray uninstall 卸载 V2Ray
 ```
 
 配置文件在/etc/v2ray/config.json
@@ -273,6 +193,8 @@ firewall-cmd --zone=public --add-port=80/tcp --permanent //永久开启80端口�
 systemctl restart firewalld
 service status firewalld
 ```
+
+
 
 ### 6、SSH连接卡顿
 
