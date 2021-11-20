@@ -88,6 +88,7 @@ User : 登录名
 port : 端口
 IdentityFile : 指明上面User对应的identityFile路径 也就是 私钥的路径
 ProxyCommand : 代理命令(不常用) , 通俗解释: 就是当你连接上目标服务器后，首先执行的命令，例如：ProxyCommand tail -f /backend/logs/info.log 表示登录目标主机后，执行此命令查看日志
+
 ```
 
 下次登录使用，即可
@@ -95,7 +96,6 @@ ProxyCommand : 代理命令(不常用) , 通俗解释: 就是当你连接上目�
 ```
 ssh banwagong-sun
 ```
-
 
 
 ### 5、弃用shadow socks，启用v2ray
@@ -114,6 +114,7 @@ systemctl stop shadowsocks # 也可以从系统层面关闭shadowsocks
 安装v2ray脚本：
 
 ```shell
+
 bash <(curl -s -L https://git.io/v2ray-setup.sh)
 
 
@@ -154,7 +155,7 @@ vmess://ewoidiI6ICIyIiwKInBzIjogImlwXzIzLjEwNi4xNTguMTM1IiwKImFkZCI6ICIyMy4xMDYu
 
 ```
 
-v2ray的配置文件/etc/v2ray/config.json:
+v2ray的配置文件usr/local/etc/v2ray/config.json:
 
 在线生成器：https://intmainreturn0.com/v2ray-config-gen/#
 
