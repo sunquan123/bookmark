@@ -59,3 +59,10 @@ git push
 git remote set-url origin  https://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@github.com/sunquan123/sunquan123.github.io.git
 ```
 
+8、git设置系统代理
+
+```shell
+# 注意修改成自己的IP和端口号
+git config --global http.proxy http://127.0.0.1:7890 
+git config --global https.proxy http://127.0.0.1:7890
+```
