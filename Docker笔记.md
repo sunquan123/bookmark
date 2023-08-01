@@ -45,3 +45,14 @@ oracle如果存储文字乱码，需要执行
 export NLS_LANG='SIMPLIFIED CHINESE_CHINA.AL32UTF8'
 ```
 
+重启docker时，自动启动相关容器
+
+```shell
+docker run -d --restart always tomcat
+```
+
+修改容器启动参数
+
+```shell
+docker container update --restart=always d8237e7c3399
+```
