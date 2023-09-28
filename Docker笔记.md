@@ -56,3 +56,14 @@ docker run -d --restart always tomcat
 ```shell
 docker container update --restart=always d8237e7c3399
 ```
+
+设置docker镜像源地址
+
+```shell
+vim /etc/docker/daemon.json
+{
+    "registry-mirrors": [https://registry.docker-cn.com","https://docker.mirrors.ustc.edu.cn"]
+}
+service docker restart
+docker info
+```

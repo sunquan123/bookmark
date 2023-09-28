@@ -27,7 +27,6 @@ fg %jobnumber //将一个后台命令进程放到前台执行
 chmod a+x g+w filename
 ```
 
-
 权限对应数字：
 
 ```
@@ -38,9 +37,24 @@ r-w-x：用4-2-1表示。
 组内g的权限为读与写:rw- = 6
 ```
 
-
 5、合并两个文件
 
 ```shell
 cat file1 file2 > newfile
+```
+
+6、top查看内存占用
+
+```shell
+# 查看某个进程id
+ps -ef | grep nginx
+# 查看指定进程id信息，cpu占用，内存占用
+top -p xxxxxx
+PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+1172601 root      20   0   97688   7100   1788 S   0.0   0.4   0:00.02 nginx
+# 也可以查看指定进程id信息，cpu占用，内存占用
+ps -aux | grep nginx
+root     1172601  0.0  0.3  97688  7100 ?        S    Aug23   0:00 nginx: master process /usr/sbin/nginx
+33       1172604  0.0 23.7 532116 441436 ?       S    Aug23   0:00 nginx: worker process
+# 0.0 0.3是cpu和内存占用，7100是内存消耗，7100k=7m，441436k=440m
 ```

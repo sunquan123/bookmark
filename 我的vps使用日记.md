@@ -18,7 +18,7 @@ cat ~/.ssh/id_rsa.pub | ssh root@172.93.45.189 -p 36666 "mkdir -p ~/.ssh && cat 
 #vim /etc/ssh/sshd_config  
 RSAAuthentication yes       #RSA身份验证:yes开启no关闭
 PubkeyAuthentication yes    #公钥身份验证:yes开启no关闭
-PermitRootLogin yes  		#允许root登录:yes开启no关闭
+PermitRootLogin yes          #允许root登录:yes开启no关闭
 PasswordAuthentication no   #密码登录方式:yes开启no关闭
 systemctl restart sshd
 ssh root@172.93.45.163 -p 29857
@@ -42,3 +42,9 @@ ssh -R 2999:目标主机ip:目标主机port local  #在中转主机上执行ssh�
 -f #后台运行
 ```
 
+4、安装ping
+
+```shell
+apt-get install iputils-ping
+yum install iputils
+```
