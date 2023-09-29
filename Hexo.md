@@ -8,6 +8,7 @@
 hexo g # 生成部署内容
 hexo d # 部署到服务器
 hexo new shoka xxx笔记 # 使用shoka主题创建新文章
+hexo server # 启动本地服务器，生成测试站点
 ```
 
 ## 常用配置
@@ -33,4 +34,3 @@ theme: shoka
 ## 主题配置
 
 themes/shoka/_config.yml
-
