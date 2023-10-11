@@ -23,6 +23,8 @@ git commit -o xx.java xx.log -m '指定文件提交了' //指定文件进行comm
 ```shell
 git push origin master //直接推上远程分支
 git pull //直接拉取远程分支
+// 克隆时可以指定文件名：
+git clone http://github.dandelion.com/demo/sample.git MySampleDir
 ```
 
 4、stash相关
