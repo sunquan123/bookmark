@@ -23,3 +23,35 @@ docker ps
 
 docker cp  mysql8:/etc/mysql /docker/mysql8.0.20/
 ```
+
+## PostgreSql数据库
+
+### 如何重启postgre数据库？
+
+```shell
+service postgresql stop
+service postgresql start
+```
+
+### 如何修改postgre数据库的配置文件？
+
+```shell
+vim /etc/postgresql/12/main/pg_hba.conf #可以配置允许远程任何数据库访问
+vim /etc/postgresql/12/main/postgresql.conf #可以配置远程ip访问控制
+```
+
+### postgre如何新建用户？
+
+```shell
+# 在命令行中使用超级用户（例如postgres）登录到PostgreSQL数据库
+sudo -u postgres psql
+# 创建具有超级用户权限的“root”角色
+CREATE USER root WITH SUPERUSER CREATEDB CREATEROLE LOGIN PASSWORD '123456';
+ALTER USER root PASSWORD ' md53175af154as44df54s4d412345sd6af';
+# 退出psql
+\q
+# 创建一个新的数据库
+createdb star
+# 连接对应数据库
+psql star
+```
