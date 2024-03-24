@@ -23,7 +23,7 @@ docker ps
 
 docker cp  mysql8:/etc/mysql /docker/mysql8.0.20/
 ```
-
+安装redis https://blog.csdn.net/BThinker/article/details/123374236
 ## PostgreSql数据库
 
 ### 如何重启postgre数据库？
