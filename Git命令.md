@@ -68,3 +68,7 @@ git remote set-url origin  https://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@gith
 git config --global http.proxy http://127.0.0.1:7890 
 git config --global https.proxy http://127.0.0.1:7890
 ```
+
+9、git仓库远程地址变更
+
+https://zhuanlan.zhihu.com/p/684626282
